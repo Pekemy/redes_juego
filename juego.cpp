@@ -55,29 +55,38 @@ Jugador Juego::comprobarGanador(){
     return NONE;
 }
 
-bool Juego::movimientoGanador(int fila, int columna, Jugador jugador){ 
-    for (int col = std::max(0, columna - 3); col <= std::min(6, columna + 3); ++col){
-        if (col + 3 < 7 && tablero[fila][col] == jugador && tablero[fila + 1][columna] == jugador && tablero[fila + 2][columna] == jugador && tablero[fila + 3][columna] == jugador){
+bool Juego::movimientoGanador(int fila, int columna, Jugador jugador) {
+    // Horizontal
+    for (int col = std::max(0, columna - 3); col <= std::min(6, columna + 3) && col + 3 < 7; ++col) {
+        if (tablero[fila][col] == jugador && tablero[fila][col + 1] == jugador &&
+            tablero[fila][col + 2] == jugador && tablero[fila][col + 3] == jugador) {
             return true;
         }
     }
-    for (int fil = std::max(0, fila - 3); fil <= std::min(5, fila + 3); ++fil){
-        if (fil + 3 < 6 && tablero[fil][columna] == jugador && tablero[fil + 1][columna] == jugador && tablero[fil + 2][columna] == jugador && tablero[fil + 3][columna] == jugador){
+    // Vertical
+    for (int fil = std::max(0, fila - 3); fil <= std::min(5, fila + 3) && fil + 3 < 6; ++fil) {
+        if (tablero[fil][columna] == jugador && tablero[fil + 1][columna] == jugador &&
+            tablero[fil + 2][columna] == jugador && tablero[fil + 3][columna] == jugador) {
             return true;
         }
     }
-    for (int fil = std::max(0, fila -3), col = std::max(0, columna -3); fil <= std::min(5, fila + 3) && col <= std::min(6, columna + 3); ++fil, col++){ // diagonal (\)
-        if (fil + 3 < 6 && col + 3 < 7 && tablero[fil][col] == jugador && tablero[fil + 1][col + 1] == jugador && tablero[fil + 2][col + 2] == jugador && tablero[fil + 3][col + 3] == jugador){
+    // Diagonal (\)
+    for (int fil = std::max(0, fila - 3), col = std::max(0, columna - 3); fil <= std::min(5, fila + 3) && col <= std::min(6, columna + 3) && fil + 3 < 6 && col + 3 < 7; ++fil, ++col) {
+        if (tablero[fil][col] == jugador && tablero[fil + 1][col + 1] == jugador &&
+            tablero[fil + 2][col + 2] == jugador && tablero[fil + 3][col + 3] == jugador) {
             return true;
         }
     }
-    for (int fil = std::min(5, fila + 3), col = std::max(0, columna - 3); fil >= std::max(0, fila - 3) && col <= std::min(6, columna + 3); --fil, col++){
-        if (fil - 3 >= 0 && col + 3 < 7 && tablero[fil][col] == jugador && tablero[fil -1][col + 1] == jugador && tablero[fil -2][col + 2] == jugador && tablero[fil -3][col + 3] == jugador){
+    // Diagonal (/)
+    for (int fil = std::min(5, fila + 3), col = std::max(0, columna - 3); fil >= std::max(0, fila - 3) && col <= std::min(6, columna + 3) && fil - 3 >= 0 && col + 3 < 7; --fil, ++col) {
+        if (tablero[fil][col] == jugador && tablero[fil - 1][col + 1] == jugador &&
+            tablero[fil - 2][col + 2] == jugador && tablero[fil - 3][col + 3] == jugador) {
             return true;
         }
     }
     return false;
 }
+
 
 bool Juego::tableroLleno(){
     for (const auto& fila : tablero){
