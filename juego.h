@@ -20,4 +20,6 @@ private:
     bool movimientoGanador(int fila, int columna, Jugador jugador);
 };
 
+void juegoPrincipal();
+
 #endif

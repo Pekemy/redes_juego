@@ -98,7 +98,7 @@ std::string Juego::obtenerTablero(){
 }
 
 
-int main(){
+void juegoPrincipal(){
     Juego juego;
     Jugador jugadorActual = JUGADOR1;
     Jugador ganador = NONE;
@@ -126,6 +126,5 @@ int main(){
     } else {
         std::cout << "Empate!" << std::endl;
     }
-    return 0;
 }
 

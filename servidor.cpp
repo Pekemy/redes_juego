@@ -65,6 +65,7 @@ void manejarConexion(int cliente1, int cliente2){
 }
 
 int main(int argc, char *argv[]) {
+    juegoPrincipal();
     if (argc < 2) {
         std::cerr << "Uso: " << argv[0] << " <puerto>\n";
         return 1;
