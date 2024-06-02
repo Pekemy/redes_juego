@@ -1,0 +1,16 @@
+# Ignorar archivos de configuración específicos de VS Code
+.vscode/
+
+# Ignorar archivos binarios compilados
+*.exe
+*.o
+*.class
+
+# Ignorar directorios y archivos generados automáticamente
+node_modules/
+build/
+dist/
+
+# Ignorar archivos de registro y archivos temporales
+*.log
+*~
