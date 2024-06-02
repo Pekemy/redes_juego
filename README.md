@@ -1,6 +1,8 @@
 # redes_juego
 # Juego de Conecta 4 en Red
 
+INTEGRANTES: MATIAS ALFREDO PEREIRA GUTIERREZ Y JAVIERA ADRIANA HENRIQUEZ MARTINEZ
+
 Este proyecto implementa un juego de Conecta 4 en red, donde un cliente y un servidor pueden jugar el juego en turnos alternos. El servidor puede jugar automáticamente contra el cliente.
 
 ## Estructura del Proyecto
