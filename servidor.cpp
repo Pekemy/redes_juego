@@ -65,7 +65,6 @@ void manejarConexion(int cliente1, int cliente2){
 }
 
 int main(int argc, char *argv[]) {
-    juegoPrincipal();
     if (argc < 2) {
         std::cerr << "Uso: " << argv[0] << " <puerto>\n";
         return 1;
@@ -112,10 +111,9 @@ int main(int argc, char *argv[]) {
         }
         std::cout << "Jugador 2 conectado." << std::endl;
 
-        std::thread(manejarConexion, newsockfd1, newsockfd2).detach();
+        std::thread t(manejarConexion, newsockfd1, newsockfd2);
+        t.detach();
     }
-
-    close(sockfd);
+    juegoPrincipal();
     return 0;
 }
-
