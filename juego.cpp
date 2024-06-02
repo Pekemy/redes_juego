@@ -1,22 +1,8 @@
+#include "juego.h"
+//#include "main.h"
 #include <iostream>
-#include <vector>
 #include <string>
-
-enum Jugador { NONE = 0, JUGADOR1 = '1', JUGADOR2 = '2' };
-
-class Juego {
-    public:
-        Juego();
-        void mostrarTablero();
-        bool hacerMovimiento(int columna, Jugador jugador);
-        Jugador comprobarGanador();
-        bool tableroLleno();
-
-    private:
-        std::vector<std::vector<Jugador>> tablero;
-        bool movimientoGanador(int fila, int columna, Jugador jugador);
-    
-};
+#include <limits>
 
 Juego::Juego(){
     tablero = std::vector<std::vector<Jugador>>(6, std::vector<Jugador>(7, NONE));
@@ -99,6 +85,19 @@ bool Juego::tableroLleno(){
     return true;
 }
 
+std::string Juego::obtenerTablero(){
+    std::string tableroStr;
+    for (const auto& fila : tablero){
+        for (const auto& celda : fila) {
+            tableroStr += (celda == NONE ? '.' : (char)celda);
+            tableroStr += " ";
+        }
+        tableroStr += "\n";
+    }
+    return tableroStr;
+}
+
+
 int main(){
     Juego juego;
     Jugador jugadorActual = JUGADOR1;
@@ -111,9 +110,11 @@ int main(){
         int columna;
         std::cin >> columna;
 
-        if (!juego.hacerMovimiento(columna, jugadorActual)){
-            std:: cout << "Movimiento invalido. Intentalo de  nuevo. " << std::endl;
-            continue;
+        while (std::cin.fail() || columna < 0 || columna > 6 || !juego.hacerMovimiento(columna, jugadorActual)){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Movimiento invalido. Intentalo de nuevo (0-6): ";
+            std::cin >> columna;
         }
         ganador = juego.comprobarGanador();
         jugadorActual = (jugadorActual == JUGADOR1) ? JUGADOR2 : JUGADOR1;
@@ -127,3 +128,4 @@ int main(){
     }
     return 0;
 }
+
